@@ -21,7 +21,7 @@
  * @subpackage culactivity_stream
  * @copyright  2013 Amanda Doughty <amanda.doughty.1@city.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * 
+ *
  */
 
 defined('MOODLE_INTERNAL') || die;
@@ -37,11 +37,6 @@ function xmldb_message_culactivity_stream__uninstall() {
     $dbman = $DB->get_manager();
 
     $table = new xmldb_table('message_culactivity_stream');
-    if ($dbman->table_exists($table)) {
-        $dbman->drop_table($table);
-    }
-
-    $table = new xmldb_table('message_culactivity_stream_q');
     if ($dbman->table_exists($table)) {
         $dbman->drop_table($table);
     }
