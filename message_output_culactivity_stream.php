@@ -55,7 +55,12 @@ class message_output_culactivity_stream extends message_output {
         $notification->component = 'local_culactivity_stream';
         $notification->userid = $eventdata->userto->id;
         $notification->userfromid = $eventdata->userfrom->id;
-        $notification->smallmessage = $eventdata->smallmessage;
+
+        if ($eventdata->smallmessage) {
+            $notification->smallmessage = $eventdata->smallmessage;
+        } else {
+            $notification->smallmessage = $eventdata->subject;
+        }
 
         if (isset($eventdata->courseid)) {
             $notification->courseid = $eventdata->courseid;
