@@ -26,5 +26,18 @@
 $string['eventdata'] = 'Cron Job';
 $string['eventdata_update_desc'] = 'Cron job to reduce the size of the message_culactivity_stream
 table by moving relevant data from eventdata field to other fields.';
+$string['message_culactivity_stream'] = 'message_culactivity_stream';
 $string['pluginname'] = 'CUL Activity Feed';
+
+$string['privacy:metadata:message_culactivity_stream'] = 'CUL Activity Stream Messages';
+$string['privacy:metadata:message_culactivity_stream:sent'] = 'The ID of the user who sent the notification';
+$string['privacy:metadata:message_culactivity_stream:userid'] = 'The ID of the user who received the notification';
+$string['privacy:metadata:message_culactivity_stream:userfromid'] = 'The ID of the user who sent the notification';
+$string['privacy:metadata:message_culactivity_stream:courseid'] = 'The ID of the course related to the notification';
+$string['privacy:metadata:message_culactivity_stream:smallmessage'] = 'The small message of the notification';
+$string['privacy:metadata:message_culactivity_stream:component'] = 'The component responsible for sending the notification';
+$string['privacy:metadata:message_culactivity_stream:timecreated'] = 'The date at which the notification was created';
+$string['privacy:metadata:message_culactivity_stream:contexturl'] = 'The URL related to this notification';
+$string['privacy:metadata:message_culactivity_stream:deleted'] = 'Whether or not the user deleted the notification';
+$string['privacy:metadata:message_culactivity_stream:timedeleted'] = 'The date at which the notification was deleted';
 $string['update'] = 'Run the cron';
