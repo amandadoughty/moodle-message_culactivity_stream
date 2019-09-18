@@ -71,7 +71,7 @@ class message_output_culactivity_stream extends message_output {
         }
 
         if (isset($eventdata->contexturl)) {
-            $notification->contexturl = $eventdata->contexturl;
+            $notification->contexturl = (string)$eventdata->contexturl;
         }
 
         $notification->timecreated = time();
