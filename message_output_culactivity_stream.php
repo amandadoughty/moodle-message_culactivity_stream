@@ -62,6 +62,11 @@ class message_output_culactivity_stream extends message_output {
             $notification->smallmessage = $eventdata->subject;
         }
 
+        // The insights notification smallmessage is too long and contains html and links.
+        if ($eventdata->name == 'insights') {
+            $notification->smallmessage = $eventdata->subject;
+        }
+
         if (isset($eventdata->courseid)) {
             $notification->courseid = $eventdata->courseid;
         }
