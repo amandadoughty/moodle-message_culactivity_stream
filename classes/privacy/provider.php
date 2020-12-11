@@ -39,7 +39,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2018 Amanda Doughty
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements 
+class provider implements
     \core_privacy\local\metadata\provider,
     \core_privacy\local\request\plugin\provider,
     \core_privacy\local\request\core_userlist_provider {
@@ -63,7 +63,6 @@ class provider implements
                 'contexturl' => 'privacy:metadata:message_culactivity_stream:contexturl',
                 'deleted' => 'privacy:metadata:message_culactivity_stream:deleted',
                 'timedeleted' => 'privacy:metadata:message_culactivity_stream:timedeleted',
-                
             ],
             'privacy:metadata:message_culactivity_stream'
         );
@@ -83,7 +82,11 @@ class provider implements
         $contextlist = new contextlist();
 
         // Messages are in the user context.
-        $hasdata = $DB->record_exists_select('message_culactivity_stream', 'userfromid = ? OR userid = ?', [$userid, $userid]);        
+        $hasdata = $DB->record_exists_select(
+            'message_culactivity_stream',
+            'userfromid = ? OR userid = ?',
+            [$userid, $userid]
+        );
 
         if ($hasdata) {
             $contextlist->add_user_context($userid);
@@ -109,7 +112,7 @@ class provider implements
         $userid = $context->instanceid;
 
         $hasdata = $DB->record_exists_select('message_culactivity_stream', 'userid = ? OR userfromid = ?', [$userid, $userid]);
-        
+
         if ($hasdata) {
             $userlist->add_user($userid);
         }
@@ -179,7 +182,7 @@ class provider implements
 
         if (empty($contexts)) {
             return;
-        }        
+        }
 
         $DB->delete_records_select('message_culactivity_stream', 'userid = ? OR userfromid = ?', [$userid, $userid]);
     }
@@ -224,8 +227,14 @@ class provider implements
 
         $notificationdata = [];
         $select = "userid = ? OR userfromid = ?";
-        $message_culactivity_stream = $DB->get_recordset_select('message_culactivity_stream', $select, [$userid, $userid], 'timecreated ASC');
-        foreach ($message_culactivity_stream as $notification) {
+        $messageculactivitystream = $DB->get_recordset_select(
+            'message_culactivity_stream',
+            $select,
+            [$userid, $userid],
+            'timecreated ASC'
+        );
+
+        foreach ($messageculactivitystream as $notification) {
             $timedeleted = !is_null($notification->timedeleted) ? transform::datetime($notification->timedeleted) : '-';
 
             $data = (object) [
@@ -235,13 +244,16 @@ class provider implements
                 'timecreated' => transform::datetime($notification->timecreated),
                 'contexturl' => $notification->contexturl,
                 'deleted' => transform::yesno($notification->deleted),
-                'timedeleted' => $timedeleted                
+                'timedeleted' => $timedeleted
             ];
 
             $notificationdata[] = $data;
         }
-        $message_culactivity_stream->close();
+        $messageculactivitystream->close();
 
-        writer::with_context($context)->export_data([get_string('message_culactivity_stream', 'message_culactivity_stream')], (object) $notificationdata);
+        writer::with_context($context)->export_data(
+            [get_string('message_culactivity_stream', 'message_culactivity_stream')],
+            (object) $notificationdata
+        );
     }
 }

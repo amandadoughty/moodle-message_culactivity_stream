@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-// vendor/bin/phpunit message/output/culactivity_stream/tests/privacy_provider_test.php
+/* vendor/bin/phpunit message/output/culactivity_stream/tests/privacy_provider_test.php */
 
 use core_privacy\local\metadata\collection;
 use message_culactivity_stream\privacy\provider;
@@ -34,6 +34,8 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy provider tests class.
+ * 
+ * @group culactivity
  *
  * @package    message_culactivity_stream
  * @copyright  2019 Amanda Doughty
@@ -63,7 +65,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $this->assertArrayHasKey('contexturl', $privacyfields);
         $this->assertArrayHasKey('deleted', $privacyfields);
         $this->assertArrayHasKey('timedeleted', $privacyfields);
-        
+
         $this->assertEquals('privacy:metadata:message_culactivity_stream', $messagestable->get_summary());
     }
 
@@ -100,7 +102,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $this->assertEquals(
                 context_user::instance($user2->id)->id,
                 $contextforuser->id);
-    }    
+    }
 
     /**
      * Test for provider::get_users_in_context() when there is a notification between users.
@@ -182,7 +184,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $notifications = (array) $writer->get_data([get_string('message_culactivity_stream', 'message_culactivity_stream')]);
 
         $this->assertCount(6, $notifications);
-    }    
+    }
 
     /**
      * Test for provider::delete_data_for_all_users_in_context().
@@ -302,7 +304,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $notification = array_shift($notifications);
         $this->assertEquals($user2->id, $notification->userfromid);
         $this->assertEquals($user3->id, $notification->userid);
-    }   
+    }
 
     /**
      * Creates a notification to be used for testing.
@@ -329,7 +331,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $record->component = 'mod_forum';
         $record->timecreated = $timecreated;
         $record->contexturl = 'http://moodle.dev.city.ac.uk/mod/forum/discuss.php?d=309';
-  
+
         return $DB->insert_record('message_culactivity_stream', $record);
     }
 }

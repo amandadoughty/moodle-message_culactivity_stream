@@ -21,8 +21,9 @@
  * @subpackage culactivity_stream
  * @copyright  2013 Amanda Doughty <amanda.doughty.1@city.ac.uk>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * 
+ *
  */
+
 $string['eventdata'] = 'Cron Job';
 $string['eventdata_update_desc'] = 'Cron job to reduce the size of the message_culactivity_stream
 table by moving relevant data from eventdata field to other fields.';
