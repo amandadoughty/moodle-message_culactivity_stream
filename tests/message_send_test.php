@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Class for testing the message processor.
- * 
+ *
  * @group culactivity
  *
  * @package message_culactivity_stream
