@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
 
 /**
  * Privacy provider tests class.
- * 
+ *
  * @group culactivity
  *
  * @package    message_culactivity_stream
