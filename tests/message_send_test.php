@@ -23,7 +23,7 @@
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/* vendor/bin/phpunit message/output/culactivity_stream/tests/message_send_test.php */
+namespace message_culactivity_stream;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -37,7 +37,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright 2020 Amanda Doughty
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class message_culactivity_stream_send_message_testcase extends advanced_testcase {
+class message_send_test extends \advanced_testcase {
 
     /**
      * Test send message.

@@ -22,7 +22,7 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-/* vendor/bin/phpunit message/output/culactivity_stream/tests/privacy_provider_test.php */
+namespace message_culactivity_stream;
 
 use core_privacy\local\metadata\collection;
 use message_culactivity_stream\privacy\provider;
@@ -41,7 +41,7 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright  2019 Amanda Doughty
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class message_culactivity_stream_privacy_provider_testcase extends \core_privacy\tests\provider_testcase {
+class privacy_provider_test extends \core_privacy\tests\provider_testcase {
 
     /**
      * Test for provider::get_metadata().
@@ -92,7 +92,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $this->assertCount(1, $contextlist);
         $contextforuser = $contextlist->current();
         $this->assertEquals(
-                context_user::instance($user1->id)->id,
+                \context_user::instance($user1->id)->id,
                 $contextforuser->id);
 
         // Test for the receiver.
@@ -100,7 +100,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $this->assertCount(1, $contextlist);
         $contextforuser = $contextlist->current();
         $this->assertEquals(
-                context_user::instance($user2->id)->id,
+                \context_user::instance($user2->id)->id,
                 $contextforuser->id);
     }
 
@@ -114,8 +114,8 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $user2 = $this->getDataGenerator()->create_user();
         $course1 = $this->getDataGenerator()->create_course();
 
-        $user1context = context_user::instance($user1->id);
-        $user2context = context_user::instance($user2->id);
+        $user1context = \context_user::instance($user1->id);
+        $user2context = \context_user::instance($user2->id);
 
         // Test nothing is found before notification is created.
         $userlist = new \core_privacy\local\request\userlist($user1context, 'message_culactivity_stream');
@@ -172,7 +172,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $this->create_notification($user2->id, $user3->id, $course1->id, $now + (2 * DAYSECS));
         $this->create_notification($user3->id, $user2->id, $course1->id, $now + (1 * DAYSECS));
 
-        $user1context = context_user::instance($user1->id);
+        $user1context = \context_user::instance($user1->id);
 
         $this->export_context_data_for_user($user1->id, $user1context, 'message_culactivity_stream');
 
@@ -202,7 +202,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         $course1 = $this->getDataGenerator()->create_course();
 
         $now = time();
-        $user1context = context_user::instance($user1->id);
+        $user1context = \context_user::instance($user1->id);
 
         // Create notifications.
         $n1 = $this->create_notification($user1->id, $user2->id, $course1->id, $now + (9 * DAYSECS));
@@ -245,7 +245,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         // There should be three notifications.
         $this->assertEquals(3, $DB->count_records('message_culactivity_stream'));
 
-        $user1context = context_user::instance($user1->id);
+        $user1context = \context_user::instance($user1->id);
         $contextlist = new \core_privacy\local\request\approved_contextlist($user1, 'message_culactivity_stream',
             [$user1context->id]);
         provider::delete_data_for_user($contextlist);
@@ -288,7 +288,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
         // There should be three notifications.
         $this->assertEquals(3, $DB->count_records('message_culactivity_stream'));
 
-        $user1context = context_user::instance($user1->id);
+        $user1context = \context_user::instance($user1->id);
         $approveduserlist = new \core_privacy\local\request\approved_userlist($user1context, 'message_culactivity_stream',
                 [$user1->id, $user2->id]);
         provider::delete_data_for_users($approveduserlist);
@@ -323,7 +323,7 @@ class message_culactivity_stream_privacy_provider_testcase extends \core_privacy
             $timecreated = time();
         }
 
-        $record = new stdClass();
+        $record = new \stdClass();
         $record->userfromid = $userfromid;
         $record->userid = $userid;
         $record->courseid = $courseid;
